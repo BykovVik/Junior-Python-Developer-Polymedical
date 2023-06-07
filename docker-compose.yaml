@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+    db:
+        image: postgres
+        restart: always
+        container_name: "postgresql"
+        environment:
+            POSTGRES_USER: student
+            POSTGRES_PASSWORD: Pan1cal_DEF_111 
+            POSTGRES_DB: univerdb
+        volumes:
+            - ./data:/var/lib/postgresql/data 
+            - ./drawSQL-pgsql-export-2023-06-06.sql:/drawSQL-pgsql-export-2023-06-06.sql
+        ports:
+            - "5432:5432"
