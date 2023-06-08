@@ -10,6 +10,6 @@ services:
             POSTGRES_DB: univerdb
         volumes:
             - ./data:/var/lib/postgresql/data 
-            - ./drawSQL-pgsql-export-2023-06-06.sql:/drawSQL-pgsql-export-2023-06-06.sql
+            - ./database.sql:/database.sql
         ports:
             - "5432:5432"
