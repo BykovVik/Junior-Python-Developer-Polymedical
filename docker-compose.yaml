@@ -13,3 +13,15 @@ services:
             - ./database.sql:/database.sql
         ports:
             - "5432:5432"
+
+    api:
+        build: ./app
+        volumes:
+            - ./app:/app
+            - ./alembic:/alembic
+            - ./alembic.ini:/alembic.ini
+        command: python3 ./app/main.py
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
