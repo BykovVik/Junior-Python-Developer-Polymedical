@@ -11,11 +11,13 @@ router = APIRouter()
 
 @router.post("/students", response_model=StudentOut)
 async def create_student(student: StudentCreate, db: Session = Depends(get_db)):
+
+    #test student data
     student_obj = Students(
-        name= "Tony",
+        name= "Student",
         last_name = "Mony",
         birthdate = date(2000, 1, 1),
-        email = "tony@gmail.com",
+        email = "mony@gmail.com",
         phone = "+380509770976",
         group_id = None
     )

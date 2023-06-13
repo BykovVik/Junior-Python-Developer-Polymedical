@@ -77,3 +77,26 @@
 * group_name: название группы.
 * course: идентификатор курса, который изучает эта группа.
 * departments_id: идентификатор отделения/факультета, к которому принадлежит эта группа.
+
+## Инструкция по установке и запуску приложения
+
+* Для проверки первого пункта задания в файле **docker-compose.yaml** указан сервис с базой данных под названием ***db***.
+    1. Запустите контейнер базы данных командой **docker-compose up db**.
+    2. Остановите контейнер командой **docker-compose stop db**.
+    3. Запустите контейнер в фоновом режиме командой **docker-compose up -d db**.
+    4. Создайте базу данных, описанную на **ER**-диаграмме, из **SQL** файла командой **docker-compose exec db psql -U student -d univerdb -f database.sql**.
+    5. Файл **ER**-диаграммы находится в корневом каталоге (**ER.png**) или доступен по ссылке <https://drawsql.app/teams/ponystudio/diagrams/university-management-systems>.
+* Для проверки второго задания перейдите в корневой каталог проекта, где расположен файл **task2SQL.sql** с запросами.
+    1. Запустите базу данных в терминале и выполните все запросы, описанные в файле **task2SQL.sql** командой **docker-compose exec db psql -U student -d univerdb -f task2SQL.sql**.
+* Для проверки третьего задания создана вторая база данных **fastapi_db**.
+    1. Запустите базу данных командой **docker-compose up fastapi_db**.
+    2. Остановите контейнер командой **docker-compose stop fastapi_db**.
+    3. Запустите контейнер в фоновом режиме командой **docker-compose up -d fastapi_db**.
+    4. Запустите контейнер с **FastAPI** командой **docker-compose up api**.
+    5. Остановите контейнер командой **docker-compose stop api**.
+    6. Выполните миграцию базы данных командой **docker-compose run --entrypoint /usr/local/bin/python api /app/manage.py**.
+    7. Снова запустите контейнер с **FastAPI** командой **docker-compose up api**.
+    8. Перейдите по адресу <http://0.0.0.0:8080/docs> и проверьте все точки входа **API**, описанные в **ТЗ**.
+
+
+

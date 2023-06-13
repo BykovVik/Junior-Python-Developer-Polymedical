@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from datetime import date
 from pydantic import BaseModel
 
@@ -25,7 +25,8 @@ class StudentDeleteResponse(BaseModel):
 
 class StudentOut(StudentBase):
     id: int
-    courses: List["CourseOut"] = []
+    # TODO: Add Groups Scheme
+    # groups: List["GroupsOut"] = []
 
     class Config:
         orm_mode = True
@@ -37,19 +38,6 @@ class TeacherBase(BaseModel):
     birthdate: date
     email: str
     phone: str
-
-
-class TeacherCreate(TeacherBase):
-    pass
-
-
-class TeacherUpdate(TeacherBase):
-    pass
-
-
-class TeacherDeleteResponse(BaseModel):
-    result: bool
-
 
 class TeacherOut(TeacherBase):
     id: int
@@ -64,13 +52,11 @@ class CourseBase(BaseModel):
 
 
 class CourseCreate(CourseBase):
-    teacher_id: int
-
+    teacher_id: Union[int, None]
 
 class CourseOut(CourseBase):
     id: int
-    teacher: TeacherOut
-    students: List[StudentOut] = []
+    teacher: Union[List[TeacherOut], None] = []
     grades: List["GradeOut"] = []
 
     class Config:
@@ -82,14 +68,14 @@ class GradeBase(BaseModel):
 
 
 class GradeCreate(GradeBase):
-    student_id: int
-    course_id: int
+    student_id: Union[int, None]
+    course_id: Union[int, None]
 
 
 class GradeOut(GradeBase):
     id: int
-    student: StudentOut
-    course: CourseOut
+    student: Union[List[StudentOut], None] = []
+    course: Union[List[CourseOut], None] = []
 
     class Config:
         orm_mode = True

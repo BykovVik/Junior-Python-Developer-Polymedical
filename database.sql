@@ -94,6 +94,14 @@ CREATE TABLE "Homeworks"(
     "course" INTEGER NOT NULL REFERENCES "Courses"("id"),
     "description" TEXT NOT NULL
 );
+CREATE TABLE "Semesters"(
+    "id" SERIAL PRIMARY KEY,
+    "semester_name" VARCHAR(255) NOT NULL,
+    "begin_semester" DATE NOT NULL,
+    "end_semester" DATE NOT NULL,
+    "courses" INTEGER NOT NULL,
+    FOREIGN KEY ("courses") REFERENCES "Courses"("id")
+);
 
 ALTER TABLE "Courses" ADD CONSTRAINT "courses_teacher_foreign" FOREIGN KEY("teacher") REFERENCES "Teachers"("id");
 ALTER TABLE "Course Programs" ADD CONSTRAINT "course_programs_course_foreign" FOREIGN KEY("course") REFERENCES "Courses"("id");
@@ -108,3 +116,4 @@ ALTER TABLE "Schedule" ADD CONSTRAINT "schedule_teacher_foreign" FOREIGN KEY("te
 ALTER TABLE "Faculties" ADD CONSTRAINT "faculties_departments_foreign" FOREIGN KEY("departments") REFERENCES "Departments"("id");
 ALTER TABLE "Groups" ADD CONSTRAINT "groups_course_foreign" FOREIGN KEY("course") REFERENCES "Courses"("id");
 ALTER TABLE "Groups" ADD CONSTRAINT "groups_departments_id_foreign" FOREIGN KEY("departments_id") REFERENCES "Departments"("id");
+ALTER TABLE "Semesters" ADD CONSTRAINT "semesters_courses_foreign" FOREIGN KEY("courses") REFERENCES "Courses"("id");

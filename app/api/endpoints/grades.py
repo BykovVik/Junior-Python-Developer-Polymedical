@@ -1,15 +1,20 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from app.api.db import get_db
-from app.api.models import Grades
-from app.api.schemas import GradeCreate, GradeBase, GradeOut
+from api.db import get_db
+from api.models import Grades
+from api.schemas import GradeCreate, GradeBase, GradeOut
 
 router = APIRouter()
 
 @router.post("/grades", response_model=GradeOut)
 async def create_grade(grade: GradeCreate, db: Session = Depends(get_db)):
-    grade_obj = Grades(**grade.dict())
+    # test grades data
+    grade_obj = Grades(
+        grade = 10,
+        student_id = None,
+        course_id = None
+    )
     db.add(grade_obj)
     db.commit()
     db.refresh(grade_obj)

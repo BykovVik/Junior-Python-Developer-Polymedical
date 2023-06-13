@@ -14,6 +14,18 @@ services:
         ports:
             - "5432:5432"
 
+    fastapi_db:
+        image: postgres
+        restart: always
+        container_name: "f_db"
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: Pan1cal_DEF_111 
+            POSTGRES_DB: fastapidb
+        volumes:
+            - ./f_data:/var/lib/postgresql/f_data 
+        ports:
+            - "8000:8000"
     api:
         build: ./app
         volumes:
@@ -24,4 +36,4 @@ services:
         ports:
             - "8080:8080"
         depends_on:
-            - db
+            - fastapi_db

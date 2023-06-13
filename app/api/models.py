@@ -1,23 +1,23 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text, Time
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text, Time, MetaData
 from sqlalchemy.orm import relationship
 from api.db import Base
 
 
 class Departments(Base):
     __tablename__ = 'Departments'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     departments_name = Column(String(255), nullable=False)
 
 class Buildings(Base):
     __tablename__ = 'Buildings'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     building_name = Column(String(255), nullable=False)
 
 class Teachers(Base):
     __tablename__ = 'Teachers'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     last_name = Column(String(255), nullable=False)
@@ -27,7 +27,7 @@ class Teachers(Base):
 
 class Courses(Base):
     __tablename__ = 'Courses'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     course_name = Column(String(255), nullable=False)
     teacher_id = Column(Integer, ForeignKey('Teachers.id'), nullable=True)
@@ -35,14 +35,14 @@ class Courses(Base):
 
 class CoursePrograms(Base):
     __tablename__ = 'CoursePrograms'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     course_id = Column(Integer, ForeignKey('Courses.id'), nullable=False)
     description = Column(Text, nullable=False)
 
 class Curriculum(Base):
     __tablename__ = 'Curriculum'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     specialty_name = Column(String(255), nullable=False)
     year_of_study = Column(Date, nullable=False)
@@ -50,7 +50,7 @@ class Curriculum(Base):
 
 class Groups(Base):
     __tablename__ = 'Groups'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     group_name = Column(String(255), nullable=False)
     course_id = Column(Integer, ForeignKey('Courses.id'), nullable=False)
@@ -59,7 +59,7 @@ class Groups(Base):
 
 class Students(Base):
     __tablename__ = 'Students'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     last_name = Column(String(255), nullable=False)
@@ -71,7 +71,7 @@ class Students(Base):
 
 class Grades(Base):
     __tablename__ = 'Grades'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     student_id = Column(Integer, ForeignKey('Students.id'), nullable=True)
     course_id = Column(Integer, ForeignKey('Courses.id'), nullable=True)
@@ -79,7 +79,7 @@ class Grades(Base):
 
 class Classrooms(Base):
     __tablename__ = 'Classrooms'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     classroom_number = Column(Integer, nullable=False)
     building_id = Column(Integer, ForeignKey('Buildings.id'), nullable=False)
@@ -87,7 +87,7 @@ class Classrooms(Base):
 
 class Exams(Base):
     __tablename__ = 'Exams'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     course_id = Column(Integer, ForeignKey('Courses.id'), nullable=False)
     date = Column(Date, nullable=False)
@@ -96,7 +96,7 @@ class Exams(Base):
 
 class Schedule(Base):
     __tablename__ = 'Schedule'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     group_id = Column(Integer, ForeignKey('Groups.id'), nullable=False)
     day = Column(Date, nullable=False)
@@ -109,7 +109,7 @@ class Schedule(Base):
 
 class Faculties(Base):
     __tablename__ = 'Faculties'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     faculties_name = Column(String(255), nullable=False)
     departments_id = Column(Integer, ForeignKey('Departments.id'), nullable=False)
@@ -117,7 +117,7 @@ class Faculties(Base):
 
 class Homeworks(Base):
     __tablename__ = 'Homeworks'
-
+    MetaData
     id = Column(Integer, primary_key=True)
     course_id = Column(Integer, ForeignKey('Courses.id'), nullable=False)
     description = Column(Text, nullable=False)
